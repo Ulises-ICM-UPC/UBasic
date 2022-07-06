@@ -46,9 +46,8 @@ The structure of the project is the following:
     * . . .
   * **`TMP`**
     * `basisImage01cal_check.png`
-    * `image000001cal_check.png`
-    * `image000001_checkplw.png`
-    * `image000001plw_check.png`
+    * `basisImage01_checkplw.png`
+    * `basisImage01plw_check.png`
     * . . .
 
 The local modules of `UBasic` are located in the **`ubasic`** folder.
