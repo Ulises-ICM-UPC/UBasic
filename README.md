@@ -124,7 +124,7 @@ Run the calibration algorithm for each image of the basis:
 
 
 ```python
-ucalib.CalibrationOfBasisImages(pathFolderBasis, eCritical, calibrationModel, verbosePlot)
+ubasic.CalibrationOfBasisImages(pathFolderBasis, eCritical, calibrationModel, verbosePlot)
 ```
 
 In case that the reprojection error of a GCP is higher than the error `eCritical` for a certain image `<basisImage>`, a message will appear suggesting to re-run the calibration of the basis or to modify the values or to delete points in the file `<basisImage>cdg.txt`. If the calibration error of an image exceeds the error `eCritical` the calibration is given as _failed_. Consider re-run the calibration of the basis or verify the GPCs and HPs.
@@ -144,7 +144,7 @@ As a result of the calibration, the calibration file `<basisImage>cal.txt` is ge
 
 In case an image is to be calibrated by setting certain parameters listed above, a `<basisImage>par.txt` in the **`basis`** folder must be provided with the specific parameter values. The structure of this file is the following:
 * `<basisImage>par.txt`: For each calibration parameter one line with 
-> `value` _`parameter_name`_
+> `value`, _`parameter_name`_
 
 ## Planviews
 
@@ -158,7 +158,7 @@ Set the folder path where the file `xy_planview.txt` is located and the value of
 
 
 ```python
-pathFolderPlanviews = pathFolderMain + os.sep + 'planviews'
+pathFolderPlanviews = os.path.join(pathFolderMain, 'planviews')
 z0 = 3.2
 ```
 
@@ -174,7 +174,7 @@ Run the algorithm to generate the planviews:
 
 
 ```python
-ucalib.PlanviewsFromImages(pathFolderImages, pathFolderPlanviews, z0, ppm, verbosePlot)
+ubasic.PlanviewsFromImages(pathFolderBasis, pathFolderPlanviews, z0, ppm, verbosePlot)
 ```
 
 As a result, for each of the calibrated images `<basisImage>.png` in folder **`basis`**, a planview `<basisImage>plw.png` will be placed in the folder **`planviews`**. Note that objects outside the plane at height `z0` will show apparent displacements due to real camera movement. In the same folder, the file `crxyz_planview.txt` will be located, containing the coordinates of the corner of the planviews images:
@@ -187,8 +187,8 @@ To verify the quality of the GCPs used in the manual calibration of the basis im
 
 
 ```python
-pathFolderBasisCheck = pathFolderMain + os.sep + 'basis_check'
-ucalib.CheckGCPs(pathFolderBasisCheck, eCritical)
+pathFolderBasisCheck = os.path.join(pathFolderMain, 'basis_check')
+ubasic.CheckGCPs(pathFolderBasisCheck, eCritical)
 ```
 
 For each file `<basisImage>cdg.txt`, the GCPs that should be revised or excluded will be reported.
@@ -205,7 +205,7 @@ Contributions to this project are welcome. To do a clean pull request, please fo
 
 ## License
 
-UCalib is released under a [AGPL-3.0 license](https://github.com/Ulises-ICM-UPC/UBasic/blob/main/LICENSE). If you use UCalib in an academic work, please cite:
+UCalib is released under a [AGPL-3.0 license](https://github.com/Ulises-ICM-UPC/UBasic/blob/master/LICENSE). If you use UCalib in an academic work, please cite:
 
     @Article{rs12111840,
       AUTHOR = {Simarro, Gonzalo and Calvete, Daniel and Souto, Paola and Guillén, Jorge},
