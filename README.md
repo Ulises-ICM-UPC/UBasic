@@ -3,7 +3,7 @@
 `UBasic` is an open source software written in Python for manual image calibration.
 
 ### Description
-The program is aimed to obtain the image calibration from a set on control points. The result of the process is the intrinsic camera parameters and the extrinsic parameters for each individual image. In addition, planviews can be generated for each image. A code to verify the quality of the GCPs used in the manual calibration of the images is also provided. The development of this software is suitable for images from any source, in particular from Argus-type video monitoring stations or drones. Details about the algorithm and methodology are described in
+The program is aimed to obtain the image calibration from a set of Ground Control Points (GCP) and, optionally, the Horizon Points (HP). The result of the process is the intrinsic and extrinsic parameters for each individual image. In addition, planviews can be generated for each image. A code to verify the quality of the GCPs used in the manual calibration of the images is also provided. The development of this software is suitable for images from any source, in particular from Argus-type video monitoring stations or drones. Details about the algorithm and methodology are described in
 > *Simarro, G.; Calvete, D.; Souto, P.; Guillen, J. Camera Calibration for Coastal Monitoring Using
 Available Snapshot Images. Remote Sens. 2020, 12, 1840; https://doi.org/doi:10.3390/rs12111840*
 
@@ -52,10 +52,10 @@ The structure of the project is the following:
 
 The local modules of `UBasic` are located in the **`ubasic`** folder.
 
-To run the demo in the folder **`example`** with the basis of images in **`basis`** using a Jupyter Notebook we provide the file `example_notebook.ipynb`. For experienced users, the `example.py` file can be run in a terminal. `UCalib` handles `PNG` (recommended) and `JPEG` image formats.
+To run the demo in the folder **`example`** with the basis of images in **`basis`** using a Jupyter Notebook we provide the file `example_notebook.ipynb`. For experienced users, the `example.py` file can be run in a terminal. `UBasic` handles `PNG` (recommended) and `JPEG` image formats.
 
 ## Image calibration
-To manually calibrate the images placed in the folder **`basis`**,  it is necessary that each image `<basisImage>.png` is supplied with a file containing the Ground Control Points (GCP) and, optionally, the Horizon Points (HP). The structure of each of these files is the following:
+To manually calibrate the images placed in the folder **`basis`**,  it is necessary that each image `<basisImage>.png` is supplied with a file containing the Ground Control Points (GCP) and, optionally, a file with the Horizon Points (HP). The structure of each of these files is the following:
 * `<basisImage>cdg.txt`: For each GCP one line with  (minimum 6)
 >`pixel-column`, `pixel-row`, `x-coordinate`, `y-coordinate`, `z-coordinate`
 * `<basisImage>cdh.txt`: For each HP one line with (minimum 3)
@@ -137,12 +137,12 @@ As a result of the calibration, the calibration file `<basisImage>cal.txt` is ge
 | Lens radial distortion (parabolic, quartic) | `k1a`, `k2a` | _-_ |
 | Lens tangential distortion (parabolic, quartic) | `p1a`, `p2a` | _-_ |
 | Pixel size | `sc`, `sr` | _-_ |
-| Decentering | `oc`, `rr` | _pixel_ |
+| Decentering | `oc`, `or` | _pixel_ |
 | Image size | `nc`, `nr` | _pixel_ |
 | Calibration error | `errorT`| _pixel_ |
 
-In case an image is to be calibrated by setting certain parameters listed above, a `<basisImage>par.txt` in the **`basis`** folder must be provided with the specific parameter values. The structure of this file is the following:
-* `<basisImage>par.txt`: For each calibration parameter one line with 
+In case an image is to be calibrated by forcing values for certain of the parameters listed above, a `<basisImage>par.txt` in the **`basis`** folder must be provided with the specific parameter values. The structure of this file is the following:
+* `<basisImage>par.txt`: For each forced calibration parameter one line with 
 > `value`, _`parameter_name`_
 
 ## Planviews

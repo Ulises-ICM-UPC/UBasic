@@ -5,6 +5,7 @@
 import cv2
 import numpy as np
 import os
+import sys
 #
 import ulises_ubasic as ulises
 #
@@ -14,7 +15,7 @@ def CalibrationOfBasisImages(pathBasis, errorTCritical, model, verbosePlot):
     model2SelectedVariablesKeys = {'parabolic':['xc', 'yc', 'zc', 'ph', 'sg', 'ta', 'k1a', 'sca'], 'quartic':['xc', 'yc', 'zc', 'ph', 'sg', 'ta', 'k1a', 'k2a', 'sca'], 'full':['xc', 'yc', 'zc', 'ph', 'sg', 'ta', 'k1a', 'k2a', 'p1a', 'p2a', 'sca', 'sra', 'oc', 'or']}
     if model not in model2SelectedVariablesKeys.keys():
         print('*** Invalid calibration model {:}'.format(model))
-        print('*** Choose one of the following calibration models: {:}'.format(list(model2SelectedVariablesKeys.keys()))); exit()
+        print('*** Choose one of the following calibration models: {:}'.format(list(model2SelectedVariablesKeys.keys()))); sys.exit()
     selectedVariablesKeys = model2SelectedVariablesKeys[model]
     #
     # obtain calibrations
@@ -93,9 +94,9 @@ def PlanviewsFromImages(pathBasis, pathPlanviews, z0, ppm, verbosePlot):
     #
     # obtain the planview domain from the cloud of points
     if not os.path.exists(pathPlanviews):
-        print('*** folder {:} not found'.format(pathPlanviews)); exit()
+        print('*** folder {:} not found'.format(pathPlanviews)); sys.exit()
     if not os.path.exists(os.path.join(pathPlanviews, 'xy_planview.txt')):
-        print('*** file xy_planview.txt not found in {:}'.format(pathPlanviews)); exit()
+        print('*** file xy_planview.txt not found in {:}'.format(pathPlanviews)); sys.exit()
     rawData = np.asarray(ulises.ReadRectangleFromTxt(os.path.join(pathPlanviews, 'xy_planview.txt'), options={'c1':2, 'valueType':'float'}))
     xsCloud, ysCloud = rawData[:, 0], rawData[:, 1]
     angle, xUL, yUL, H, W = ulises.Cloud2Rectangle(xsCloud, ysCloud)
