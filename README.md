@@ -40,7 +40,7 @@ The structure of the project is the following:
     * `basisImage01cdg.txt`
     * . . .
   * **`planviews`**
-    * `crxyz_planviews.txt`
+    * `crxyz_planview.txt`
     * `xy_planview.txt`
     * `basisImage01plw.png`
     * . . .
